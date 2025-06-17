@@ -17,11 +17,7 @@ export async function uploadCsvFile(file) {
 }
 
 export async function fetchOptimizationTasks(jobId) {
-  const res = await fetch(`http://localhost:3000/api/optimize/${jobId}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({}),
-  });
+  const res = await fetch(`http://localhost:3000/api/optimize/${jobId}`);
   if (!res.ok) throw new Error('Failed to fetch optimization tasks');
   return res.json();
 }

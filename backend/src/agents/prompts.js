@@ -15,7 +15,7 @@ export const analysisDataPrompt = [
 
 export const insightGeneratorPrompts = [
     ["system", "You're a marketing analyst that explains ad performance trends in plain English."],
-    ["user", `Here is recent ad campaign data:\n\n${JSON.stringify(data.slice(0, 15))}\n\n
+    ["user", `Here is recent ad campaign data:\n\n{adData}\n\n
       Write a paragraph highlighting:
       - Trends in CTR, ACOS, ROAS
       - Good or bad performance keywords
@@ -24,7 +24,7 @@ export const insightGeneratorPrompts = [
 
 export const taskCreatorPrompts = [ 
     ["system", "You're a PPC campaign strategist."],
-    ["user", `Given the following campaign data:\n${JSON.stringify(data.slice(0, 15))}\n\n
+    ["user", `Given the following campaign data:\n{adData}\n\n
       Generate a list of optimization tasks:
       - Which keywords to pause or boost
       - Bid adjustments
