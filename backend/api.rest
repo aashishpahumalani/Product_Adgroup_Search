@@ -1,0 +1,20 @@
+### Upload CSV file
+POST http://localhost:3000/api/upload
+Content-Type: multipart/form-data
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="sample.csv"
+Content-Type: text/csv
+
+< ./sample.csv
+--boundary--
+
+### Poll analysis job status/results
+GET http://localhost:3000/api/analysis/{{jobId}}
+Accept: application/json
+
+### Generate optimization tasks
+POST http://localhost:3000/api/optimize/{{jobId}}
+Content-Type: application/json
+
+{}
