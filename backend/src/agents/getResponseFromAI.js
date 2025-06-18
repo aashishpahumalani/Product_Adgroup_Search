@@ -4,37 +4,32 @@ import { StructuredOutputParser } from "@langchain/core/output_parsers";
 import { RunnableSequence } from "@langchain/core/runnables";
 import { analysisDataSchema } from "./zodSchemas.js";
 
-const llm = new ChatGoogleGenerativeAI({  
+const llm = new ChatGoogleGenerativeAI({
   model: "models/gemini-1.5-flash", // or "models/gemini-1.5-flash"
   temperature: 0.3,
   apiKey: "AIzaSyB3w_Dd3V9SyH5OARK1MAP7YFSK5VyUT6M", // Set in your .env or env var
 });
 
-async function analyzeData(data, schema, requiredPrompt) {
+async function getResponseFromAI(data, schema, requiredPrompt) {
   try {
-    
     const parser = StructuredOutputParser.fromZodSchema(schema);
     const formatInstructions = parser.getFormatInstructions();
 
     const prompt = ChatPromptTemplate.fromMessages(requiredPrompt);
 
-    const chain = RunnableSequence.from([
-      prompt,
-      llm,
-      parser,
-    ]);    
+    const chain = RunnableSequence.from([prompt, llm, parser]);
 
-     const response = await chain.invoke({
+    const response = await chain.invoke({
       adData: JSON.stringify(data),
-      formatInstructions: formatInstructions  // truncate if needed
+      formatInstructions: formatInstructions,
     });
     console.log(`Response: ${JSON.stringify(response)}`);
-    
+
     return response;
   } catch (error) {
-    console.log('Error analyzing data:', error);
+    console.log("Error analyzing data:", error);
     throw new Error(`Data analysis failed: ${error.message}`);
   }
 }
 
-export default analyzeData;
+export default getResponseFromAI;
