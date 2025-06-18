@@ -23,21 +23,17 @@ This project is a robust backend system for large-scale advertising data analysi
    ```sh
    npm install
    ```
-3. **Set up PostgreSQL**
-   - Create a database (e.g., `ad_analysis`).
-   - Run the schema:
-     ```sh
-     psql -U <user> -d ad_analysis -f schema.sql
-     ```
-4. **Start Redis** (for job queue)
-   - Ensure Redis is running locally on port 6379.
-5. **Start the backend server**
+3. **Start required services with Docker Compose**
    ```sh
-   node src/app.js
+   docker-compose up -d postgres redis
    ```
-6. **Start the worker**
+4. **Start the backend server**
    ```sh
-   node src/jobs/worker.js
+   npm run start
+   ```
+5. **Start the worker**
+   ```sh
+   npm run worker
    ```
 
 ## API Documentation
@@ -63,14 +59,12 @@ This project is a robust backend system for large-scale advertising data analysi
   GET /api/analysis/123
   ```
 
-### 3. Generate Optimization Tasks
-**POST** `/api/optimize/:id`
+### 3. Get Optimization Recommendations
+**GET** `/api/optimize/:id`
 - **Response:** `{ "tasks": [ { keyword, recommendation, priority } ] }`
 - **Example:**
   ```http
-  POST /api/optimize/123
-  Content-Type: application/json
-  {}
+  GET /api/optimize/123
   ```
 
 ## Agent Design (LangChain Integration)

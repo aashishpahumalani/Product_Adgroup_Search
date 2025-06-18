@@ -9,12 +9,23 @@ CREATE TABLE IF NOT EXISTS analysis_jobs (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS optimize_summary (
+  id SERIAL PRIMARY KEY,
+  job_id INTEGER REFERENCES analysis_jobs(id),
+  summary TEXT,
+  trends TEXT,
+  anomalies TEXT[],
+  good_keywords TEXT[],
+  bad_keywords TEXT[],
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE TABLE IF NOT EXISTS optimize_tasks (
   id SERIAL PRIMARY KEY,
   job_id INTEGER REFERENCES analysis_jobs(id),
-  insight TEXT, -- stores the insight/summary for the optimization
-  task TEXT,    -- stores each actionable recommendation/task
+  keyword TEXT,
+  recommendation TEXT,
+  priority TEXT CHECK (priority IN ('high', 'medium', 'low')), -- enforce valid priorities
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

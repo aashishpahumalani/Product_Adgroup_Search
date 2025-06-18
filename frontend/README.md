@@ -18,7 +18,7 @@ This is a minimal React frontend for the Ad Analysis & Optimization backend. It 
 3. The app will be available at `http://localhost:5173` (default Vite port).
 
 ## API Integration
-- The frontend expects the backend API to be running at `http://localhost:3000`.
+- The frontend expects the backend API to be running at `http://localhost:3001`.
 - Endpoints used:
   - `POST /api/upload` (file upload)
   - `GET /api/analysis/:id` (fetch results)

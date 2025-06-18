@@ -8,13 +8,10 @@ async function parseCSV(filePath) {
       fs.createReadStream(filePath)
         .pipe(parse({ columns: true, skip_empty_lines: true, bom: true }))
         .on('data', (row) => {
-          console.log(`Parsed row: ${JSON.stringify(row)}`);
-          console.log(`Parsed row spend : ${row['Spend(USD)']}`);
-          console.log(`Parsed row sales : ${row['Sales(USD)']}`);
-          console.log(`Parsed row clicks : ${row.Clicks}`);
-          console.log(`Parsed row impression : ${row.Impressions}`);
+
           // Data validation: check required fields
           if (!row['Spend(USD)'] || !row['Sales(USD)'] || !row.Clicks || !row.Impressions) return;
+          
           // Convert to numbers, handle missing values
           row.spend = parseFloat(row['Spend(USD)']) || 0;
           row.sales = parseFloat(row['Sales(USD)']) || 0;

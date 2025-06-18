@@ -21,8 +21,6 @@ const upload = multer({
   storage: multer.diskStorage({
     destination: path.join(__dirname, '../uploads'),
     filename: (req, file, cb) => {
-         req.on("data", chunk => console.log("Data chunk:", chunk.length));
-  req.on("end", () => console.log("Request fully received"));
       // Ensure .csv extension
       let ext = path.extname(file.originalname).toLowerCase();
       console.log(`Original file extension: ${ext}`);
