@@ -1,6 +1,5 @@
 // Utility for API calls to backend
 export async function fetchAnalysisResults(jobId) {
-  const apiHost = 'http://localhost:3000/api';
   const res = await fetch(`http://localhost:3001/api/analysis/${jobId}`);
   if (!res.ok) throw new Error('Failed to fetch results');
   return res.json();
