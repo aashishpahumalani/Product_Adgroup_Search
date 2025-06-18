@@ -2,12 +2,11 @@ import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ChatPromptTemplate, PromptTemplate } from "@langchain/core/prompts";
 import { StructuredOutputParser } from "@langchain/core/output_parsers";
 import { RunnableSequence } from "@langchain/core/runnables";
-import { analysisDataSchema } from "./zodSchemas.js";
 
 const llm = new ChatGoogleGenerativeAI({
   model: "models/gemini-1.5-flash", // or "models/gemini-1.5-flash"
   temperature: 0.3,
-  apiKey: "AIzaSyB3w_Dd3V9SyH5OARK1MAP7YFSK5VyUT6M", // Set in your .env or env var
+  apiKey: process.env.GOOGLE_API_KEY, // Set in your .env or env var
 });
 
 async function getResponseFromAI(data, schema, requiredPrompt) {
@@ -23,7 +22,6 @@ async function getResponseFromAI(data, schema, requiredPrompt) {
       adData: JSON.stringify(data),
       formatInstructions: formatInstructions,
     });
-    console.log(`Response: ${JSON.stringify(response)}`);
 
     return response;
   } catch (error) {

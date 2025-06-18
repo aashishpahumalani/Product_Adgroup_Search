@@ -10,7 +10,7 @@ export async function addJob(jobId, filename) {
   await analysisQueue.add({ jobId, filename });
 }
 
-export async function setAnalysisData(jobId, response) {
+export async function setAnalysisCache(jobId, response) {
   await redisClient.set(
     `analysis:${jobId}`,
     JSON.stringify(response),
@@ -19,7 +19,7 @@ export async function setAnalysisData(jobId, response) {
   );
 }
 
-export async function getAnalysisData(jobId) {
+export async function getAnalysisCache(jobId) {
   return JSON.parse(await redisClient.get(`analysis:${jobId}`));
 }
 
@@ -32,6 +32,6 @@ export async function setoptimize(jobId, response) {
   );
 }
 
-export async function getoptimize(jobId) {
+export async function getOptimizeCached(jobId) {
   return JSON.parse(await redisClient.get(`optimize:${jobId}`));
 }
