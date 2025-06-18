@@ -23,7 +23,7 @@ export async function getAnalysisCache(jobId) {
   return JSON.parse(await redisClient.get(`analysis:${jobId}`));
 }
 
-export async function setoptimize(jobId, response) {
+export async function setoptimizeCache(jobId, response) {
   await redisClient.set(
     `optimize:${jobId}`,
     JSON.stringify(response),

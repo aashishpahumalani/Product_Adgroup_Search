@@ -2,6 +2,9 @@ import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ChatPromptTemplate, PromptTemplate } from "@langchain/core/prompts";
 import { StructuredOutputParser } from "@langchain/core/output_parsers";
 import { RunnableSequence } from "@langchain/core/runnables";
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const llm = new ChatGoogleGenerativeAI({
   model: "models/gemini-1.5-flash", // or "models/gemini-1.5-flash"

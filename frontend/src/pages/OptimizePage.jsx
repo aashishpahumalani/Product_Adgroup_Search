@@ -17,9 +17,9 @@ const OptimizePage = () => {
     setTasks([]);
     try {
       const data = await fetchOptimizationTasks(jobId);
-      if (data.getInsights || data.getOptimize) {
-        setInsights(data.getInsights || {});
-        setTasks(data.getOptimize?.tasks || []);
+      if (data.getInsightsAI || data.getOptimizeAI) {
+        setInsights(data.getInsightsAI || {});
+        setTasks(data.getOptimizeAI?.tasks || []);
       } else {
         setError(data.error || 'No insights or tasks found.');
       }

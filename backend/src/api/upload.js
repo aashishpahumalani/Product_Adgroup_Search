@@ -15,8 +15,8 @@ const uploadService = async (req, res) => {
     }
     
     // Add job to the queue
-    await addJob(jobId, filename);
-    return res.json({ jobId });
+    await addJob(jobId.id, filename);
+    return res.json({ jobId: jobId.id });
   } catch (err) {
     console.log('Error uploading file:', err);
     throw res.status(500).json({ error: err.message });
