@@ -32,4 +32,9 @@ export async function setJobError(id, error) {
   );
 }
 
+export async function getLastJobId() {
+  const res = await pool.query("SELECT id FROM analysis_jobs ORDER BY id DESC LIMIT 1");
+  return res.rows[0]?.id || null;
+}
+
 

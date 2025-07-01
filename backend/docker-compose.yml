@@ -33,17 +33,27 @@ services:
       - redis
     ports:
       - '3001:3001'
-    environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USERNAME: postgres
-      DB_PASSWORD: postgres
-      DB_DATABASE: product-adsgroup-search_app
-      PORT: 3001
-      NODE_ENV: production
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
+    volumes:
+      - uploads_data:/usr/src/app/src/uploads      
+    env_file:
+      - .env
+    command: npm run dev
+
+  worker:
+    build:
+      context: .
+    container_name: product-adsgroup-search-worker
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - uploads_data:/usr/src/app/src/uploads
+    env_file:
+      - .env
+    command: npm run dev:worker
 
 volumes:
   postgres_data:
   redis_data:
+  uploads_data:

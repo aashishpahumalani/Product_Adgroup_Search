@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import analysisService from './analysis.js';
 import uploadService from './upload.js';
 import optimizeService from './optimize.js';
+import lastJobIdService from './lastJobId.js';
 import fs from 'fs';
 
 const router = express.Router();
@@ -44,6 +45,7 @@ const upload = multer({
 router.post('/upload', upload.single('file'), uploadService);
 router.get('/analysis/:id', analysisService);
 router.get('/optimize/:id', optimizeService);
+router.get('/last-job-id', lastJobIdService);
 
 export default router;
 
